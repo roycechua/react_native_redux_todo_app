@@ -6,9 +6,12 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import { connect, useDispatch } from "react-redux";
 
-const AddTodoScreen = ({navigation}) => {
+const AddTodoScreen = ({navigation, mapDispatchToProps}) => {
   const [todoText, setTodoText] = useState('');
+
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -23,7 +26,10 @@ const AddTodoScreen = ({navigation}) => {
       />
       <TouchableOpacity
         style={styles.addTodoButton}
-        onPress={() => navigation.navigate('Home', { todo: todoText })}
+        onPress={() => {
+          dispatch({ type: 'ADD_TODO', payload: { task: todoText } })
+          navigation.navigate('Home')
+        }}
       >
         <Text style={{fontSize: 25, color: 'white', fontWeight: 'bold'}}>
           Add Todo

@@ -7,29 +7,23 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import { useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = ({route, navigation}) => {
-  const {todo, updated_todo} = route.params;
-
-  const [todoID, setTodoID] = useState(0);
   // const [todos, setTodos] = useState([
   //   {id: 1, task: 'Some task 1', isTaskDone: false},
   //   {id: 2, task: 'Some task 2', isTaskDone: false},
   // ]);
-  const [todos, setTodos] = useState([]);
 
+  const todos_list = useSelector(state => state.todos.todos_list)
+  const [todos, setTodos] = useState(todos_list);
+  
   useEffect(() => {
-    if (route.params?.todo) {
-      // If a new todo was given
-      setTodos([...todos, {id: todoID, task: todo, isDone: false}]);
-      setTodoID(todoID + 1);
-    }
-    if (route.params?.updated_todo) {
-      // If an existing todo was updated
-      setTodos([...todos.filter((element) => element.id != updated_todo.id), updated_todo])
-    }
-  }, [route.params?.todo, route.params?.updated_todo]);
+
+  }, []);
+
+  console.log(todos)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -43,16 +37,14 @@ const HomeScreen = ({route, navigation}) => {
     });
   }, [navigation]);
 
-  // console.log(todos);
-
   return (
     <>
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.container}>
-          {todos.length > 0 ? (
+          {todos_list.length > 0 ? (
             <FlatList
               style={styles.todoListStyle}
-              data={todos}
+              data={todos_list}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({item}) => {
                 return (
@@ -76,16 +68,18 @@ const HomeScreen = ({route, navigation}) => {
                     <View style={{flexDirection: 'row'}}>
                       <TouchableOpacity
                         style={{margin: 10}}
-                        onPress={() => {
-                          let updated_item = item;
-                          updated_item.isDone = !updated_item.isDone
-                          setTodos([...todos.filter((element) => element.id != item.id), updated_item])
-                        }}>
+                        // onPress={() => {
+                        //   let updated_item = item;
+                        //   updated_item.isDone = !updated_item.isDone
+                        //   setTodos([...todos.filter((element) => element.id != item.id), updated_item])
+                        // }}
+                        >
                         <Icon style={{color:'#5CB85C'} }name={'check'} size={20} />
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={{margin: 10}}
-                        onPress={() => setTodos([...todos.filter((element) => element.id != item.id)])}>
+                        // onPress={() => setTodos([...todos.filter((element) => element.id != item.id)])}
+                        >
                         <Icon style={{color:'#DC3545'}} name={'times'} size={20} />
                       </TouchableOpacity>
                     </View>
