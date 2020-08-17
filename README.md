@@ -1,8 +1,10 @@
 # react_native_redux_todo_app
 
-This is an example of a todo app written with React Native using State Management with Redux. This version of Redux makes use of the Hooks API in Redux that you can use with functional components instead of the traditional implementation with class-based components.
+This is an example of a todo app written with React Native using State Management with Redux. This version of Redux makes use of the Hooks API in Redux that you can use with functional components instead of the traditional implementation with class-based components. 
 
 You can learn more about Redux Hooks API here: [https://react-redux.js.org/api/hooks](https://react-redux.js.org/api/hooks)
+
+If you want to compare it with an app that uses the regular React Hooks with passing parameters using React Navigation then you can also checkout my other repository here: [https://github.com/roycechua23/react_native_todo_app](https://github.com/roycechua23/react_native_todo_app)
 
 # Dependencies
 
