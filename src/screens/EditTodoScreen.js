@@ -1,17 +1,20 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
 
 const EditTodoScreen = ({route, navigation}) => {
-  const {id, task} = route.params.existing_todo;
-  
+  const id = route.params.existing_todoID;
+  console.log(id)
+  const todo = useSelector(state => state.todos.todos_list.find(element => element.id === id))
+  const dispatch = useDispatch();
 
-  const [todoText, setTodoText] = useState(task);
+  const [todoText, setTodoText] = useState(todo.task);
 
   return (
     <View style={styles.container}>
       <Text style={{fontSize: 25}}>Enter the new todo:</Text>
       <TextInput
-        placeholder={task}
+        placeholder={todo.task}
         style={styles.TextInputStyle}
         autoCapitalize={'sentences'}
         autoCorrect={false}
@@ -20,7 +23,10 @@ const EditTodoScreen = ({route, navigation}) => {
       />
       <TouchableOpacity
         style={styles.updateTodoButton}
-        onPress={() => navigation.navigate('Home', { updated_todo: {id: id, task: todoText} })}
+        onPress={() => {
+          dispatch({ type: 'EDIT_TODO', payload: { id: id, task: todoText, isDone: todo.isDone } })
+          navigation.navigate('Home')
+        }}
       >
         <Text style={{fontSize: 25, color: 'white', fontWeight: 'bold'}}>
           Update Todo
