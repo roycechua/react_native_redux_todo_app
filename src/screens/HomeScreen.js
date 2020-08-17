@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useLayoutEffect} from 'react';
 import {
   View,
   SafeAreaView,
@@ -7,15 +7,14 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = ({navigation}) => {
-
-  const todos_list = useSelector(state => state.todos.todos_list)
+  const todos_list = useSelector((state) => state.todos.todos_list);
   const dispatch = useDispatch();
-  
-  console.log(todos_list)
+
+  console.log(todos_list);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -43,7 +42,11 @@ const HomeScreen = ({navigation}) => {
                   <View style={styles.todoListItemStyle}>
                     <TouchableOpacity
                       style={{flex: 1, margin: 10}}
-                      onPress={() => navigation.navigate('EditTodo', { existing_todoID: item.id })}>
+                      onPress={() =>
+                        navigation.navigate('EditTodo', {
+                          existing_todoID: item.id,
+                        })
+                      }>
                       {item.isDone ? (
                         <Text
                           style={{
@@ -60,19 +63,39 @@ const HomeScreen = ({navigation}) => {
                     <View style={{flexDirection: 'row'}}>
                       <TouchableOpacity
                         style={{margin: 10}}
-                        onPress={() => dispatch({ type: 'TOGGLE_TODO', payload: { id: item.id }})}
-                        >
-                        {
-                          item.isDone 
-                          ? <Icon style={{color:'#5CB85C'} }name={'check'} size={20} />
-                          : <Icon style={{color:'gray'} }name={'check'} size={20} />
-                        }
+                        onPress={() =>
+                          dispatch({
+                            type: 'TOGGLE_TODO',
+                            payload: {id: item.id},
+                          })
+                        }>
+                        {item.isDone ? (
+                          <Icon
+                            style={{color: '#5CB85C'}}
+                            name={'check'}
+                            size={20}
+                          />
+                        ) : (
+                          <Icon
+                            style={{color: 'gray'}}
+                            name={'check'}
+                            size={20}
+                          />
+                        )}
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={{margin: 10}}
-                        onPress={() => dispatch({ type: 'DELETE_TODO', payload: { id: item.id }})}
-                        >
-                        <Icon style={{color:'#DC3545'}} name={'times'} size={20} />
+                        onPress={() =>
+                          dispatch({
+                            type: 'DELETE_TODO',
+                            payload: {id: item.id},
+                          })
+                        }>
+                        <Icon
+                          style={{color: '#DC3545'}}
+                          name={'times'}
+                          size={20}
+                        />
                       </TouchableOpacity>
                     </View>
                   </View>
