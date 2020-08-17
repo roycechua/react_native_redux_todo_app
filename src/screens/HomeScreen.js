@@ -62,7 +62,11 @@ const HomeScreen = ({navigation}) => {
                         style={{margin: 10}}
                         onPress={() => dispatch({ type: 'TOGGLE_TODO', payload: { id: item.id }})}
                         >
-                        <Icon style={{color:'#5CB85C'} }name={'check'} size={20} />
+                        {
+                          item.isDone 
+                          ? <Icon style={{color:'#5CB85C'} }name={'check'} size={20} />
+                          : <Icon style={{color:'gray'} }name={'check'} size={20} />
+                        }
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={{margin: 10}}
