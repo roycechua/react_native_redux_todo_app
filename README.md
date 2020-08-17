@@ -1,6 +1,27 @@
 # react_native_redux_todo_app
 
-This is an example of a todo app written with React Native using State Management with Redux. 
+This is an example of a todo app written with React Native using State Management with Redux. This version of Redux makes use of the Hooks API in Redux that you can use with functional components instead of the traditional implementation with class-based components.
+
+You can learn more about Redux Hooks API here: [https://react-redux.js.org/api/hooks](https://react-redux.js.org/api/hooks)
+
+# Dependencies
+
+This is app is running on the latest **React Native version 0.63.2** and the dependencies are managed by **Yarn**. 
+
+Once you've cloned the repository, install using 
+```
+yarn install
+yarn link react-native-gesture-handler
+yarn link react-native-vector-icons 
+```
+Then run the project using 
+```
+yarn run android 
+```
+or 
+```
+yarn run ios
+```
 
 # Demo
 
