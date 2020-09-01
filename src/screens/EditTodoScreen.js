@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const EditTodoScreen = ({route, navigation}) => {
   const id = route.params.existing_todoID;
-  console.log(id)
   const todo = useSelector(state => state.todos.todos_list.find(element => element.id === id))
   const dispatch = useDispatch();
 
