@@ -20,7 +20,7 @@ const HomeScreen = ({navigation}) => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
-          style={{margin: 15}}
+          style={{marginRight: 15}}
           onPress={() => navigation.navigate('AddTodo')}>
           <Icon name="plus" size={25} color="white" />
         </TouchableOpacity>

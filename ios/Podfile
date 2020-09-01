@@ -10,8 +10,6 @@ target 'react_native_redux_todo_app' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
   target 'react_native_redux_todo_appTests' do
     inherit! :complete
     # Pods for testing
