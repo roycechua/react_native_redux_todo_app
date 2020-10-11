@@ -12,9 +12,8 @@ This is app is running on the latest **React Native version 0.63.2** and the dep
 
 Once you've cloned the repository, install using 
 ```
-yarn install
-yarn link react-native-gesture-handler
-yarn link react-native-vector-icons 
+yarn install 
+npx pod-install (You must have CocoaPods installed on your Mac machine for this to work)
 ```
 Then run the project using 
 ```
@@ -22,7 +21,7 @@ yarn run android
 ```
 or 
 ```
-yarn run ios
+yarn run ios (XCode must be installed on your Mac machine)
 ```
 
 # Demo
