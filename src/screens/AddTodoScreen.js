@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Alert,
   View,
   Text,
   StyleSheet,
@@ -14,6 +15,19 @@ const AddTodoScreen = ({navigation, mapDispatchToProps}) => {
 
   const dispatch = useDispatch();
 
+  handleAddTodo = (todoText) => {
+    if(todoText.length > 0) {
+      dispatch(addTodo(todoText))
+      navigation.navigate('Home')
+    } else {
+      Alert.alert('No text entered in the Text Input', 
+                  'You cannot add an empty todo.',
+                  [
+                    'Ok'
+                  ])
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Text style={{fontSize: 25}}>Task to do:</Text>
@@ -27,10 +41,7 @@ const AddTodoScreen = ({navigation, mapDispatchToProps}) => {
       />
       <TouchableOpacity
         style={styles.addTodoButton}
-        onPress={() => {
-          dispatch(addTodo(todoText))
-          navigation.navigate('Home')
-        }}
+        onPress={() => handleAddTodo(todoText)}
       >
         <Text style={{fontSize: 25, color: 'white', fontWeight: 'bold'}}>
           Add Todo

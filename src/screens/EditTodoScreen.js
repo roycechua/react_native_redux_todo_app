@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { Alert, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { editTodo } from '../redux/actions';
 
@@ -11,7 +11,17 @@ const EditTodoScreen = ({route, navigation}) => {
   const [todoText, setTodoText] = useState(todo.task);
 
   handleEditTodo = (id, task, isDone) => {
-    dispatch(editTodo(id, task, isDone));
+    if(task.length > 0) {
+      dispatch(editTodo(id, task, isDone));
+      navigation.navigate('Home');
+    } else {
+      Alert.alert('No text entered in the Text Input', 
+                  'You cannot add an empty todo.',
+                  [
+                    'Ok'
+                  ])
+    }
+    
   };
 
   return (
@@ -27,10 +37,7 @@ const EditTodoScreen = ({route, navigation}) => {
       />
       <TouchableOpacity
         style={styles.updateTodoButton}
-        onPress={() => {
-          handleEditTodo(id, todoText, todo.isDone)
-          navigation.navigate('Home')
-        }}
+        onPress={() => handleEditTodo(id, todoText, todo.isDone)}
       >
         <Text style={{fontSize: 25, color: 'white', fontWeight: 'bold'}}>
           Update Todo
