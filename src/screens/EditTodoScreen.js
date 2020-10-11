@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+import { editTodo } from '../redux/actions';
 
 const EditTodoScreen = ({route, navigation}) => {
   const id = route.params.existing_todoID;
@@ -8,6 +9,10 @@ const EditTodoScreen = ({route, navigation}) => {
   const dispatch = useDispatch();
 
   const [todoText, setTodoText] = useState(todo.task);
+
+  handleEditTodo = (id, task, isDone) => {
+    dispatch(editTodo(id, task, isDone));
+  };
 
   return (
     <View style={styles.container}>
@@ -23,7 +28,7 @@ const EditTodoScreen = ({route, navigation}) => {
       <TouchableOpacity
         style={styles.updateTodoButton}
         onPress={() => {
-          dispatch({ type: 'EDIT_TODO', payload: { id: id, task: todoText, isDone: todo.isDone } })
+          handleEditTodo(id, todoText, todo.isDone)
           navigation.navigate('Home')
         }}
       >

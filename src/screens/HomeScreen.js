@@ -8,6 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import { toggleTodo, deleteTodo } from '../redux/actions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = ({navigation}) => {
@@ -64,10 +65,7 @@ const HomeScreen = ({navigation}) => {
                       <TouchableOpacity
                         style={{margin: 10}}
                         onPress={() =>
-                          dispatch({
-                            type: 'TOGGLE_TODO',
-                            payload: {id: item.id},
-                          })
+                          dispatch(toggleTodo(item.id))
                         }>
                         {item.isDone ? (
                           <Icon
@@ -86,10 +84,7 @@ const HomeScreen = ({navigation}) => {
                       <TouchableOpacity
                         style={{margin: 10}}
                         onPress={() =>
-                          dispatch({
-                            type: 'DELETE_TODO',
-                            payload: {id: item.id},
-                          })
+                          dispatch(deleteTodo(item.id))
                         }>
                         <Icon
                           style={{color: '#DC3545'}}

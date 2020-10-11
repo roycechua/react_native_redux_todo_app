@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addTodo } from '../redux/actions';
 
 const AddTodoScreen = ({navigation, mapDispatchToProps}) => {
   const [todoText, setTodoText] = useState('');
@@ -27,7 +28,7 @@ const AddTodoScreen = ({navigation, mapDispatchToProps}) => {
       <TouchableOpacity
         style={styles.addTodoButton}
         onPress={() => {
-          dispatch({ type: 'ADD_TODO', payload: { task: todoText } })
+          dispatch(addTodo(todoText))
           navigation.navigate('Home')
         }}
       >
