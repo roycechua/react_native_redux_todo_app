@@ -46,6 +46,7 @@ const App = () => {
             component={AddTodoScreen}
             options={{
             title: 'Add Todo',
+            headerBackTitle: '',
             headerStyle: {
               backgroundColor: '#2196F3',
             },
@@ -60,6 +61,7 @@ const App = () => {
             component={EditTodoScreen}
             options={{
             title: 'Edit Todo',
+            headerBackTitle: '',
             headerStyle: {
               backgroundColor: '#2196F3',
             },
