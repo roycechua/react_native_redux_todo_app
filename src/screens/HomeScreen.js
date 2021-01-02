@@ -24,7 +24,7 @@ const HomeScreen = ({navigation}) => {
   useEffect(() => {
     axios.get('http://308d23ae3a13.ngrok.io/todos')
     .then((res)=>{dispatch(
-      setTodo(res.data.todo_list))
+      setTodo(res.data))
       showMessage({
         message: "Todos Successfully Synced",
         type: "success",
