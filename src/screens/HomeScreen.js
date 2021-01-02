@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect,useLayoutEffect} from 'react';
 import {
   View,
   SafeAreaView,
@@ -8,14 +8,46 @@ import {
   FlatList,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import { toggleTodo, deleteTodo } from '../redux/actions';
+import { setTodo, toggleTodo, deleteTodo } from '../redux/actions';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { showMessage, hideMessage } from "react-native-flash-message";
+import FlashMessage from "react-native-flash-message";
+
+import axios from 'axios';
 
 const HomeScreen = ({navigation}) => {
   const todos_list = useSelector((state) => state.todos.todos_list);
   const dispatch = useDispatch();
 
   console.log(todos_list);
+
+  useEffect(() => {
+    axios.get('http://308d23ae3a13.ngrok.io/todos')
+    .then((res)=>{dispatch(
+      setTodo(res.data.todo_list))
+      showMessage({
+        message: "Todos Successfully Synced",
+        type: "success",
+        icon: "success",
+      });
+    })
+    .catch((err) => {
+      dispatch(setTodo([]));
+      if(err.message.includes('404')) {
+        showMessage({
+          message: "Server Unavailable for Todos Sync",
+          description: "Server is not available at this moment.",
+          type: "danger",
+          icon: "danger",
+        });
+      } else {
+        showMessage({
+          message: "Todo Sync Failed",
+          type: "danger",
+        });
+      }
+    });
+  }, [])
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -106,6 +138,7 @@ const HomeScreen = ({navigation}) => {
             <Icon name="plus" size={25} color="white" />
           </TouchableOpacity>
         </View>
+        <FlashMessage position="top" />
       </SafeAreaView>
     </>
   );
