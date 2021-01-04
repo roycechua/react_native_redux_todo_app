@@ -21,33 +21,33 @@ const HomeScreen = ({navigation}) => {
 
   console.log(todos_list);
 
-  useEffect(() => {
-    axios.get('http://308d23ae3a13.ngrok.io/todos')
-    .then((res)=>{dispatch(
-      setTodo(res.data))
-      showMessage({
-        message: "Todos Successfully Synced",
-        type: "success",
-        icon: "success",
-      });
-    })
-    .catch((err) => {
-      dispatch(setTodo([]));
-      if(err.message.includes('404')) {
-        showMessage({
-          message: "Server Unavailable for Todos Sync",
-          description: "Server is not available at this moment.",
-          type: "danger",
-          icon: "danger",
-        });
-      } else {
-        showMessage({
-          message: "Todo Sync Failed",
-          type: "danger",
-        });
-      }
-    });
-  }, [])
+  // useEffect(() => {
+  //   axios.get('http://308d23ae3a13.ngrok.io/todos')
+  //   .then((res)=>{dispatch(
+  //     setTodo(res.data))
+  //     showMessage({
+  //       message: "Todos Successfully Synced",
+  //       type: "success",
+  //       icon: "success",
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     dispatch(setTodo([]));
+  //     if(err.message.includes('404')) {
+  //       showMessage({
+  //         message: "Server Unavailable for Todos Sync",
+  //         description: "Server is not available at this moment.",
+  //         type: "danger",
+  //         icon: "danger",
+  //       });
+  //     } else {
+  //       showMessage({
+  //         message: "Todo Sync Failed",
+  //         type: "danger",
+  //       });
+  //     }
+  //   });
+  // }, [])
 
   useLayoutEffect(() => {
     navigation.setOptions({
