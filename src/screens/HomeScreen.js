@@ -107,7 +107,6 @@ const HomeScreen = ({navigation}) => {
             <Icon name="plus" size={25} color="white" />
           </TouchableOpacity>
         </View>
-        <FlashMessage position="top" />
       </SafeAreaView>
     </>
   );
