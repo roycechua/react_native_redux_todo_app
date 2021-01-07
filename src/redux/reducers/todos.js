@@ -48,8 +48,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         todos_list: [
-          ...state.todos_list.filter((element) => element.id != id),
           {id, task, isDone},
+          ...state.todos_list.filter((element) => element.id != id),
         ],
       };
     }
