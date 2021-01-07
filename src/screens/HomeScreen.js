@@ -74,6 +74,25 @@ const HomeScreen = ({navigation}) => {
                 return (
                   <View style={styles.todoListItemStyle}>
                     <TouchableOpacity
+                      style={{margin: 10}}
+                      onPress={() =>
+                        dispatch(toggleTodo(item.id))
+                      }>
+                      {item.isDone ? (
+                        <Icon
+                          style={{color: '#5CB85C'}}
+                          name={'check-circle'}
+                          size={25}
+                        />
+                      ) : (
+                        <Icon
+                          style={{color: 'gray'}}
+                          name={'circle-thin'}
+                          size={25}
+                        />
+                      )}
+                    </TouchableOpacity>
+                    <TouchableOpacity
                       style={{flex: 1, margin: 10}}
                       onPress={() =>
                         navigation.navigate('EditTodo', {
@@ -94,25 +113,7 @@ const HomeScreen = ({navigation}) => {
                       )}
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row'}}>
-                      <TouchableOpacity
-                        style={{margin: 10}}
-                        onPress={() =>
-                          dispatch(toggleTodo(item.id))
-                        }>
-                        {item.isDone ? (
-                          <Icon
-                            style={{color: '#5CB85C'}}
-                            name={'check'}
-                            size={20}
-                          />
-                        ) : (
-                          <Icon
-                            style={{color: 'gray'}}
-                            name={'check'}
-                            size={20}
-                          />
-                        )}
-                      </TouchableOpacity>
+                      
                       <TouchableOpacity
                         style={{margin: 10}}
                         onPress={() =>
@@ -121,7 +122,7 @@ const HomeScreen = ({navigation}) => {
                         <Icon
                           style={{color: '#DC3545'}}
                           name={'times'}
-                          size={20}
+                          size={25}
                         />
                       </TouchableOpacity>
                     </View>
@@ -130,7 +131,7 @@ const HomeScreen = ({navigation}) => {
               }}
             />
           ) : (
-            <Text>You have no todos right now..</Text>
+            <Text style={styles.noTodoStyle}>You have no todos right now..</Text>
           )}
           <TouchableOpacity
             style={styles.FloatingActionButton}
@@ -148,15 +149,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'stretch',
-    padding: 10,
+    padding: 5,
+  },
+  noTodoStyle: {
+    margin: 10,
+    alignSelf:'center',
+    fontSize: 15,
   },
   todoListStyle: {
     flex: 1,
     padding: 5,
   },
   todoListItemStyle: {
-    borderColor: 'black',
-    borderWidth: 1,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
     borderRadius: 5,
     flex: 1,
     flexDirection: 'row',
